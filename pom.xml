@@ -16,7 +16,7 @@
     limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss.eap.quickstarts</groupId>
@@ -43,6 +43,7 @@
     </licenses>
 
     <properties>
+        <java.version>11</java.version>
         <!-- The versions for BOMs, Dependencies and Plugins -->
         <version.server.bom>8.0.0.GA-redhat-00009</version.server.bom>
         <version.eap.maven.plugin>1.0.0.Final-redhat-00014</version.eap.maven.plugin>
@@ -104,18 +105,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencyManagement>
         <dependencies>
@@ -124,6 +113,13 @@
                 <groupId>org.jboss.bom</groupId>
                 <artifactId>jboss-eap-ee-with-tools</artifactId>
                 <version>${version.server.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.7.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -137,6 +133,11 @@
 
         <!-- Import the CDI API, we use provided scope as the API is included in
         JBoss EAP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.6.3</version>
+        </dependency>
         <dependency>
             <groupId>jakarta.enterprise</groupId>
             <artifactId>jakarta.enterprise.cdi-api</artifactId>
@@ -261,24 +262,24 @@
             <scope>test</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.jboss.arquillian.container</groupId>-->
-<!--            <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>-->
-<!--            <version>1.0.0.Final</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.jboss.weld</groupId>-->
-<!--            <artifactId>weld-core</artifactId>-->
-<!--            <version>2.3.5.Final</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-simple</artifactId>-->
-<!--            <version>1.6.4</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.jboss.arquillian.container</groupId>-->
+        <!--            <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>-->
+        <!--            <version>1.0.0.Final</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.jboss.weld</groupId>-->
+        <!--            <artifactId>weld-core</artifactId>-->
+        <!--            <version>2.3.5.Final</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.slf4j</groupId>-->
+        <!--            <artifactId>slf4j-simple</artifactId>-->
+        <!--            <version>1.6.4</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.jboss.as</groupId>
