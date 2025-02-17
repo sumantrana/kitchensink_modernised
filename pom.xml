@@ -30,7 +30,7 @@
     </parent>
     <artifactId>kitchensink</artifactId>
     <version>8.0.0.GA</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Quickstart: kitchensink</name>
     <description>A starter Jakarta EE web application project for use in JBoss EAP</description>
 
@@ -145,11 +145,6 @@
         </dependency>
 
         <!-- Needed for running tests (you may also use TestNG) -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <!-- Now we declare any tools needed -->
 
@@ -288,12 +283,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.3</version>
+            </plugin>
+        </plugins>
+    </build>
 
     <profiles>
         <profile>
