@@ -27,5 +27,8 @@
 
     <!-- Write your navigation rules here. You are encouraged to use CDI
         for creating @Named managed beans. -->
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>
 
 </faces-config>
