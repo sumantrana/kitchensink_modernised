@@ -43,7 +43,7 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
-    public Member findByEmail(String email){
+    public Optional<Member> findByEmail(String email){
         return memberRepository.findMemberByEmail(email);
     }
 

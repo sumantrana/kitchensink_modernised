@@ -1,7 +1,7 @@
 package org.jboss.as.quickstarts.kitchensink.member;
 
-import jakarta.persistence.NoResultException;
-import jakarta.validation.*;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -110,12 +111,9 @@ public class MemberController {
      * @return True if the email already exists, and false otherwise
      */
     public boolean emailAlreadyExists(String email) {
-        Member member = null;
-        try {
-            member = memberService.findByEmail(email);
-        } catch (NoResultException e) {
-            // ignore
-        }
-        return member != null;
+
+        Optional<Member> member = memberService.findByEmail(email);
+        return member.isPresent();
+
     }
 }
