@@ -17,19 +17,19 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotNull
-    @Size(min = 1, max = 25)
-    @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
+    @NotNull(message = "Must not be null.")
+    @Size(min = 1, max = 25, message = "Length must be between 1 and 25.")
+    @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers.")
     String name;
 
-    @NotNull
-    @NotEmpty
-    @Email
+    @NotNull(message = "Must not be null.")
+    @NotEmpty(message = "Must not be empty.")
+    @Email(message = "Must be a well-formed email address.")
     String email;
 
-    @NotNull
-    @Size(min = 10, max = 12)
-    @Digits(fraction = 0, integer = 12)
+    @NotNull(message = "Must not be null.")
+    @Size(min = 10, max = 12, message = "Length must be between 10 and 12.")
+    @Digits(fraction = 0, integer = 12, message = "Must be an whole number.")
     String phoneNumber;
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -32,9 +33,12 @@ public class MemberController {
     }
 
     @GetMapping(path="/")
-    public String newMemberForm(Model model){
-        model.addAttribute("member", new Member());
+    public String newMemberForm(@ModelAttribute Member member, Model model){
         model.addAttribute("members", memberService.findAllOrderedByName());
+        if ( model.containsAttribute("validationFailures")){
+            Object failures = model.getAttribute("validationFailures");
+            model.addAttribute(BindingResult.MODEL_KEY_PREFIX + "member", failures);
+        }
         return "index";
     }
 
@@ -52,27 +56,25 @@ public class MemberController {
 
     }
 
-    @PostMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createMember(@ModelAttribute Member member, Model model) {
+    @PostMapping(path = "/rest/members", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String createMember(@ModelAttribute Member member, Model model, RedirectAttributes redirectAttributes) {
 
         try {
 
             // Validates member using bean validation
             BindingResult bindingResult = validateMember(member);
             if ( bindingResult.hasErrors() ){
-                model.addAttribute(BindingResult.MODEL_KEY_PREFIX + "member", bindingResult);
+                redirectAttributes.addFlashAttribute("validationFailures", bindingResult);
             } else {
                 memberService.register(member);
-                model.addAttribute("member", new Member());
-                model.addAttribute("successMessage", "Registered!");
+                redirectAttributes.addFlashAttribute("successMessage", "Registered!");
             }
 
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
 
-        model.addAttribute("members", memberService.findAllOrderedByName());
-        return "index";
+        return "redirect:/";
     }
 
     /**
@@ -93,7 +95,7 @@ public class MemberController {
 
         if (! bindingResult.hasErrors() ) {
             if (emailAlreadyExists(member.getEmail())) {
-                bindingResult.rejectValue("email", "NotUnique", "Email taken");
+                bindingResult.rejectValue("email", "NotUnique", "Email already registered.");
             }
         }
 

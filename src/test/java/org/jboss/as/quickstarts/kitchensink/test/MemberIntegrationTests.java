@@ -23,7 +23,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
@@ -63,7 +62,7 @@ public class MemberIntegrationTests {
         HttpEntity<Member> request = new HttpEntity<>(newMember);
         ResponseEntity<Map> response = testRestTemplate.postForEntity(getHTTPEndpoint(), request, Map.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
+        assertThat(response.getStatusCode().is3xxRedirection()).isTrue();
         assertThat(response.hasBody()).isFalse();
 
     }

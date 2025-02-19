@@ -1,7 +1,5 @@
 /Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/SpringBootApp.java
 /Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/member/Member.java
 /Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/member/MemberController.java
-/Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/member/MemberJSFController.java
 /Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/member/MemberRepository.java
-/Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/member/MemberResourceController.java
 /Users/rsumantsingh/Sumant/workspace/Java/jboss-eap-quickstarts/kitchensink/src/main/java/org/jboss/as/quickstarts/kitchensink/member/MemberService.java
