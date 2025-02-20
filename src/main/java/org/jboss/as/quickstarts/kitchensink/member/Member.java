@@ -1,21 +1,24 @@
 package org.jboss.as.quickstarts.kitchensink.member;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.math.BigInteger;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Document(collection = "member")
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    @Indexed(unique = true)
+    BigInteger id;
 
     @NotNull(message = "Must not be null.")
     @Size(min = 1, max = 25, message = "Length must be between 1 and 25.")

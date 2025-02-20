@@ -16,14 +16,17 @@
  */
 package org.jboss.as.quickstarts.kitchensink.test;
 
+import org.jboss.as.quickstarts.kitchensink.SpringBootApp;
 import org.jboss.as.quickstarts.kitchensink.member.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,6 +34,7 @@ import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MemberIntegrationTests {
 

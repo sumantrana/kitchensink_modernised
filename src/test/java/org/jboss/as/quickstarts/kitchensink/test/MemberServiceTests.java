@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.math.BigInteger;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -34,9 +36,9 @@ public class MemberServiceTests {
     void findById_WhenInvoked_callsFindByIdOfRepository(){
 
         MemberService memberService = new MemberService(memberRepository);
-        memberService.findById(1L);
+        memberService.findById(BigInteger.ONE);
 
-        verify(memberRepository, times(1)).findById(1L);
+        verify(memberRepository, times(1)).findById(BigInteger.ONE);
     }
 
     @Test

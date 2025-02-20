@@ -50,7 +50,7 @@ public class MemberController {
     }
 
     @GetMapping(path = "/rest/members/{id}")
-    public ResponseEntity<Member> lookupMemberById(@PathVariable("id") Long id) {
+    public ResponseEntity<Member> lookupMemberById(@PathVariable("id") BigInteger id) {
 
         Optional<Member> member = memberService.findById(id);
         return member.map(ResponseEntity::ok)

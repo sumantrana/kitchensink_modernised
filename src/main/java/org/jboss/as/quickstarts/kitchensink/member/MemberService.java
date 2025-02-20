@@ -20,6 +20,7 @@ package org.jboss.as.quickstarts.kitchensink.member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class MemberService {
         return memberRepository.findAllByOrderByName();
     }
 
-    public Optional<Member> findById(Long id){
+    public Optional<Member> findById(BigInteger id){
         return memberRepository.findById(id);
     }
 
