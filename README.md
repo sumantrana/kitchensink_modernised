@@ -64,3 +64,21 @@
 
 * Access the application at the following url: http://localhost:8083/kitchensink/
 
+### MongoDB Atlas Integration
+
+* Checkout the mongo-atlas-integration branch
+
+  `git checkout mongo-atlas-integration`
+
+* Build the code. The tests will be run against a mongo container. Ensure docker is up and running.
+
+  `mvn clean install`
+
+* Run the code
+
+  `mvn spring-boot:run -Dspring-boot.run.arguments="--spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>"`
+
+* Access the application at the following url: http://localhost:8083/kitchensink/
+
+
+
