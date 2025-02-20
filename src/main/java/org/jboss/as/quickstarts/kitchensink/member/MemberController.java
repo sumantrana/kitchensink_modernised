@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,8 +49,8 @@ public class MemberController {
         return new ResponseEntity<>(memberService.findAllOrderedByName(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/rest/members/{id:[0-9]+}")
-    public ResponseEntity<Member> lookupMemberById(@PathVariable("id") long id) {
+    @GetMapping(path = "/rest/members/{id}")
+    public ResponseEntity<Member> lookupMemberById(@PathVariable("id") Long id) {
 
         Optional<Member> member = memberService.findById(id);
         return member.map(ResponseEntity::ok)
@@ -58,10 +59,11 @@ public class MemberController {
     }
 
     @PostMapping(path = "/rest/members", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createMember(@ModelAttribute Member member, RedirectAttributes redirectAttributes) {
+    public String createMember(@ModelAttribute Member member, Model model, RedirectAttributes redirectAttributes) {
 
         try {
 
+            // Validates member using bean validation
             BindingResult bindingResult = validateMember(member);
             if ( bindingResult.hasErrors() ){
                 redirectAttributes.addFlashAttribute("validationFailures", bindingResult);
@@ -88,6 +90,7 @@ public class MemberController {
 
     private BindingResult validateMember(Member member) {
 
+        // Create a bean validator and check for issues.
         SpringValidatorAdapter springValidator = new SpringValidatorAdapter(validator);
         BindingResult bindingResult = new BeanPropertyBindingResult(member, "member");
         springValidator.validate(member, bindingResult);
@@ -108,7 +111,7 @@ public class MemberController {
      * @param email The email to check
      * @return True if the email already exists, and false otherwise
      */
-    private boolean emailAlreadyExists(String email) {
+    public boolean emailAlreadyExists(String email) {
 
         Optional<Member> member = memberService.findByEmail(email);
         return member.isPresent();

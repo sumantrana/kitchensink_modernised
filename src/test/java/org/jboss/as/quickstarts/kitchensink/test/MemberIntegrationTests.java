@@ -27,7 +27,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,7 +59,7 @@ public class MemberIntegrationTests {
         Member newMember = new Member(null, "Jane Doe", currentMillis + "-jane@mailinator.com", "2125551234");
 
         HttpEntity<Member> request = new HttpEntity<>(newMember);
-        ResponseEntity<Map> response = testRestTemplate.postForEntity(getHTTPEndpoint(), request, Map.class);
+        ResponseEntity<String> response = testRestTemplate.postForEntity(getHTTPEndpoint(), request, String.class);
 
         assertThat(response.getStatusCode().is3xxRedirection()).isTrue();
         assertThat(response.hasBody()).isFalse();
