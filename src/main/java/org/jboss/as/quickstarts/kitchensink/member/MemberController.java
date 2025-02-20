@@ -58,11 +58,10 @@ public class MemberController {
     }
 
     @PostMapping(path = "/rest/members", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createMember(@ModelAttribute Member member, Model model, RedirectAttributes redirectAttributes) {
+    public String createMember(@ModelAttribute Member member, RedirectAttributes redirectAttributes) {
 
         try {
 
-            // Validates member using bean validation
             BindingResult bindingResult = validateMember(member);
             if ( bindingResult.hasErrors() ){
                 redirectAttributes.addFlashAttribute("validationFailures", bindingResult);
@@ -89,7 +88,6 @@ public class MemberController {
 
     private BindingResult validateMember(Member member) {
 
-        // Create a bean validator and check for issues.
         SpringValidatorAdapter springValidator = new SpringValidatorAdapter(validator);
         BindingResult bindingResult = new BeanPropertyBindingResult(member, "member");
         springValidator.validate(member, bindingResult);
@@ -110,7 +108,7 @@ public class MemberController {
      * @param email The email to check
      * @return True if the email already exists, and false otherwise
      */
-    public boolean emailAlreadyExists(String email) {
+    private boolean emailAlreadyExists(String email) {
 
         Optional<Member> member = memberService.findByEmail(email);
         return member.isPresent();

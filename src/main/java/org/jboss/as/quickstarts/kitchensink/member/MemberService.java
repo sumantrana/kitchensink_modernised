@@ -33,8 +33,6 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    //Todo: Check on firing an event at member creation (Spring Modulith)
-
     public List<Member> findAllOrderedByName(){
         return memberRepository.findAllByOrderByName();
     }
