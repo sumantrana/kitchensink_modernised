@@ -54,7 +54,7 @@ public class MemberIntegrationTests {
     }
 
     @Test
-    public void testRegister() throws Exception {
+    public void register_WithValidParams_RegistersMember() throws Exception {
 
         String currentMillis = String.valueOf(System.currentTimeMillis());
         Member newMember = new Member(null, "Jane Doe", currentMillis + "-jane@mailinator.com", "2125551234");
