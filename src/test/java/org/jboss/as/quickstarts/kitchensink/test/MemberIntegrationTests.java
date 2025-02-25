@@ -23,10 +23,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,4 +70,25 @@ public class MemberIntegrationTests {
 
     }
 
+    @Test
+    public void getAllMembers_WhenInvoked_ReturnsAllRegisteredMembers() {
+
+        ResponseEntity<Member[]> memberListResponse = testRestTemplate.getForEntity(getHTTPEndpoint(), Member[].class);
+        assertThat(memberListResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(Objects.requireNonNull(memberListResponse.getBody()).length).isEqualTo(1);
+        assertThat((memberListResponse.getBody())[0].getEmail()).isEqualTo("john.smith@mailinator.com");
+
+    }
+
+    @Test
+    public void getMemberForId_WhenInvoked_ReturnsRegisteredMemberWithId() {
+
+        ResponseEntity<Member> memberResponse = testRestTemplate.getForEntity(getHTTPEndpoint() + "/0", Member.class);
+        assertThat(memberResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(Objects.requireNonNull(memberResponse.getBody()).getEmail()).isEqualTo("john.smith@mailinator.com");
+        assertThat(Objects.requireNonNull(memberResponse.getBody()).getId()).isEqualTo(0);
+        assertThat(Objects.requireNonNull(memberResponse.getBody()).getName()).isEqualTo("John Smith");
+        assertThat(Objects.requireNonNull(memberResponse.getBody()).getPhoneNumber()).isEqualTo("2125551212");
+
+    }
 }
