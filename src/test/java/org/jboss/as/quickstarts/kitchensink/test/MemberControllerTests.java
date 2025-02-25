@@ -1,6 +1,6 @@
 package org.jboss.as.quickstarts.kitchensink.test;
 
-import org.jboss.as.quickstarts.kitchensink.member.Member;
+import org.jboss.as.quickstarts.kitchensink.member.internal.Member;
 import org.jboss.as.quickstarts.kitchensink.member.MemberController;
 import org.jboss.as.quickstarts.kitchensink.member.MemberService;
 import org.junit.jupiter.api.Test;

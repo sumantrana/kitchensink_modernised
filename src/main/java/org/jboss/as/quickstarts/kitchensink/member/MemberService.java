@@ -18,6 +18,9 @@ package org.jboss.as.quickstarts.kitchensink.member;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.as.quickstarts.kitchensink.member.internal.Member;
+import org.jboss.as.quickstarts.kitchensink.member.internal.MemberRepository;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,9 +31,11 @@ import java.util.Optional;
 public class MemberService {
 
     MemberRepository memberRepository;
+    private final ApplicationEventPublisher events;
 
-    public MemberService(MemberRepository memberRepository){
+    public MemberService(MemberRepository memberRepository, ApplicationEventPublisher events){
         this.memberRepository = memberRepository;
+        this.events = events;
     }
 
     public List<Member> findAllOrderedByName(){
@@ -48,5 +53,6 @@ public class MemberService {
     public void register(Member member) throws Exception {
         log.info("Registering {}", member.getName());
         memberRepository.save(member);
+        events.publishEvent(new MemberCreatedEvent());
     }
 }

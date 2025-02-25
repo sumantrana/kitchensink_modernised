@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.kitchensink.member;
+package org.jboss.as.quickstarts.kitchensink.member.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.as.quickstarts.kitchensink.test;
 
-import org.jboss.as.quickstarts.kitchensink.member.Member;
+import org.jboss.as.quickstarts.kitchensink.member.internal.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

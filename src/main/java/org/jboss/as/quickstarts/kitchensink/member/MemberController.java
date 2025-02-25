@@ -3,6 +3,7 @@ package org.jboss.as.quickstarts.kitchensink.member;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.as.quickstarts.kitchensink.member.internal.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 

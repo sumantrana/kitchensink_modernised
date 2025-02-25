@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.kitchensink.member;
+package org.jboss.as.quickstarts.kitchensink.member.internal;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+
 public class Member {
 
     @Id
