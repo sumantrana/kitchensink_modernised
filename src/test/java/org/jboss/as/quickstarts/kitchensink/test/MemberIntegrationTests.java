@@ -49,7 +49,6 @@ public class MemberIntegrationTests {
     protected URI getHTTPEndpoint() {
         String host = "http://localhost:" + port;
         try {
-            //return new URI(host);
             return new URI(host + "/kitchensink/rest/members");
         } catch (URISyntaxException ex) {
             throw new RuntimeException(ex);
